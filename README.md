@@ -71,3 +71,63 @@ Yes it is!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+# Whole Slide Image (WSI) Viewer
+
+An interactive viewer for examining medical slide images with annotations and findings display.
+
+## Features
+
+- Interactive slide viewing with zoom and pan controls
+- Thumbnail "hub view" with viewport indicator
+- Findings panel showing cell counts and percentages
+- Bounding box visualizations around detected cells
+
+## Usage Instructions
+
+- **Pan**: Click and drag on the main image
+- **Zoom**: Use the mouse wheel or the +/- buttons
+- The hub view in the top right shows your current viewport location
+- Cell detections are shown as blue bounding boxes
+- The left panel shows counts and statistics for detected cells
+
+## Data Structure
+
+The application expects detection results in the following format:
+
+```json
+{
+  "detections": [
+    {
+      "x": 100,
+      "y": 100,
+      "width": 30,
+      "height": 30,
+      "class": "Angled Cell",
+      "confidence": 0.95
+    }
+  ],
+  "summary": {
+    "rbc": {
+      "Angled Cells": { "count": 222, "percentage": 67 },
+      // Other cell types...
+    },
+    "wbc": {
+      // WBC cell types...
+    },
+    "platelets": {
+      "Count": 222,
+      "Percentage": 222
+    }
+  }
+}
+```
+
+## Development
+
+This project was built using React, TypeScript, and Tailwind CSS. To run it locally:
+
+```
+npm install
+npm run dev
+```
